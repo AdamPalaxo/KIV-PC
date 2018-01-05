@@ -193,7 +193,7 @@ void print_paths(Stack *path, char *buffer)
 
     int n;
 
-    /* copy data of stack */
+    /* create reverse stack to have path in correct order*/
     Node *temp = path->head;
     while(temp != NULL)
     {
@@ -225,7 +225,7 @@ int print_edges(VoidStack *edges, char *buffer)
     VoidStack *reverse = malloc(sizeof(VoidStack));
     void_stack_new(reverse, DATE_LENGTH);
 
-    /* reverse stack */
+    /* create reverse stack to have edges in correct order*/
     while (edges->loglength != 0)
     {
         void_stack_pop(edges, weight);
@@ -240,6 +240,8 @@ int print_edges(VoidStack *edges, char *buffer)
         strcpy(max_weight, weight);
 
         sprintf(buffer + strlen(buffer), "%s", weight);
+
+        void_stack_push(edges, weight);
     }
 
     while (reverse->loglength != 0)
@@ -256,6 +258,8 @@ int print_edges(VoidStack *edges, char *buffer)
         }
 
         sprintf(buffer + strlen(buffer), ",%s", weight);
+
+        void_stack_push(edges, weight);
     }
 
     metric = (int) compute_metric(min_weight, max_weight);
@@ -332,7 +336,7 @@ void all_paths(Graph *graph, Vertex *s, Vertex *v, Stack *path, List **paths, Vo
 
     if(s->id == v->id)
     {
-        char buffer[1000];
+        char buffer[1000] = "";
         int metric;
         print_paths(path, buffer);
         metric = print_edges(edges, buffer);

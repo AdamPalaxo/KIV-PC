@@ -54,6 +54,10 @@ void add(List **head, char *text, int length, int metric)
         current = *head;
         while ((current->next != NULL && current->next->length <= new_node->length))
         {
+            if(current->next->length == new_node->length && current->next->metric > new_node->metric)
+            {
+                break;
+            }
             current = current->next;
         }
         new_node->next = current->next;
