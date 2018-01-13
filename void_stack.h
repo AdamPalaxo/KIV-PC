@@ -1,5 +1,5 @@
-#ifndef DFS_VOID_STACK_H
-#define DFS_VOID_STACK_H
+#ifndef __VOID_STACK_H__
+#define __VOID_STACK_H__
 
 typedef struct stack
 {

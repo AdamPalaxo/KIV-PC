@@ -4,31 +4,36 @@
 
 #include "stack.h"
 
+/* Creates new node respectively new element
+ * which can be pushed to stack */
 Node *create_node(int data)
 {
 	Node *temp_node = malloc(sizeof(Node));
 
-	if(!temp_node)
+	if (temp_node == NULL)
 	{
         fprintf(stderr, "Out of memory!\n");
-        EXIT_FAILURE;
+        exit(1);
+    }
+    else
+    {
+        temp_node->data = data;
+        temp_node->next = NULL;
     }
 
-    temp_node->data = data;
-    temp_node->next = NULL;
 
 	return temp_node;
 }
 
+/* Creates new stack and allocates memory */
 Stack *stack_new()
 {
 	Stack *stack = malloc(sizeof(Stack));
-	if(stack == NULL)
+	if (stack == NULL)
 	{
         fprintf(stderr, "Out of memory!\n");
-        EXIT_FAILURE;
+        exit(1);
 	}
-    else
 
 	stack->head = NULL;
 	stack->size = 0;
@@ -36,18 +41,19 @@ Stack *stack_new()
     return stack;
 }
 
+/* Pushes elements into stack */
 void stack_push(Stack *stack, int data)
 {
     Node *newNode = create_node(data);
 
-    if(newNode == NULL)
+    if (newNode == NULL)
     {
         fprintf(stderr, "Out of memory!\n");
-        EXIT_FAILURE;
+        exit(1);
     }
     else
     {
-        if(stack->head == NULL)
+        if (stack->head == NULL)
         {
             newNode->next = NULL;
         }
@@ -61,11 +67,12 @@ void stack_push(Stack *stack, int data)
 
 }
 
+/* Pops elements from top of stack */
 int stack_pop(Stack *stack)
 {
-    int data;
+    int data = 0;
 
-    if(stack->head == NULL)
+    if (stack->head == NULL)
     {
         printf("\nStack is Empty!!!\n");
     }
@@ -81,16 +88,17 @@ int stack_pop(Stack *stack)
     return data;
 }
 
+/* Prints the whole stack */
 void stack_display(Stack *stack)
 {
-    if(stack->head == NULL)
+    if (stack->head == NULL)
     {
         printf("\nStack is Empty!!!\n");
     }
     else
     {
         Node *temp = stack->head;
-        while(temp->next != NULL)
+        while (temp->next != NULL)
         {
             printf("%d--->",temp->data);
             temp = temp -> next;
@@ -99,9 +107,10 @@ void stack_display(Stack *stack)
     }
 }
 
+/* Checks if stack is empty */
 int stack_empty(Stack *stack)
 {
-    if(stack->size == 0)
+    if (stack->size == 0)
     {
         return 1;
     }

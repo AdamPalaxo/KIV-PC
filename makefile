@@ -2,6 +2,9 @@ PROGRAM=dfs.exe
 OBJ=main.o stack.o void_stack.o linked_list.o
 
 # -ansi: tells the compiler to implement the ANSI language option. This turns off certain "features" of GCC which are incompatible with the ANSI standard
+# -Wall: enables all the warnings about constructions that some users consider questionable
+# -Wextra: enables some extra warning flags that are not enabled by -Wall
+# -Werror: every warning is treated as an error
 # -pedantic: used in conjunction with -ansi, this tells the compiler to be adhere strictly to the ANSI standard, rejecting any code which is not compliant
 # 
 OPT=-ansi -Wall -Wextra -Werror -pedantic

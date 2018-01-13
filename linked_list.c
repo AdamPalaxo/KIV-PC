@@ -3,7 +3,7 @@
 #include <string.h>
 #include "linked_list.h"
 
-/* Print the whole list. If the 'head' is null the list is empty. */
+/* Prints the whole list. If the 'head' is null the list is empty. */
 void print_list(List **head)
 {
     List *current = *head;
@@ -16,20 +16,19 @@ void print_list(List **head)
 
     while (current != NULL)
     {
-        printf("%s\r\n", current->text);
+        printf("%s\n", current->text);
         current = current->next;
     }
 }
 
-/* Add a new person into the list. */
+/* Adds a new element into the list. */
 void add(List **head, char *text, int length, int metric)
 {
     List *new_node, *current;
 
-    /* allocate node */
     new_node = malloc(sizeof(List));
 
-    if (new_node)
+    if (new_node != NULL)
     {
         new_node->text = malloc(strlen(text) + 1);
         strcpy(new_node->text, text);
@@ -40,10 +39,10 @@ void add(List **head, char *text, int length, int metric)
     else
     {
         fprintf(stderr, "Out of memory!\n");
-        EXIT_FAILURE;
+        exit(1);
     }
 
-    if (*head == NULL || (*head)->length > new_node->length)
+    if (*head == NULL || (*head)->length > new_node->length || ((*head)->length == new_node->length && (*head)->metric > new_node->metric))
     {
         new_node->next = *head;
         *head = new_node;
@@ -54,7 +53,7 @@ void add(List **head, char *text, int length, int metric)
         current = *head;
         while ((current->next != NULL && current->next->length <= new_node->length))
         {
-            if(current->next->length == new_node->length && current->next->metric > new_node->metric)
+            if (current->next->length == new_node->length && current->next->metric > new_node->metric)
             {
                 break;
             }
@@ -66,7 +65,7 @@ void add(List **head, char *text, int length, int metric)
 
 }
 
-/* Delete the whole list. */
+/* Deletes the whole list and frees allocated memory. */
 void delete_list(List **head)
 {
     List *current = *head;

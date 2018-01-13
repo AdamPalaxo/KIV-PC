@@ -18,7 +18,6 @@ typedef struct stack_t
 Stack *stack_new();
 void stack_push(Stack *stack, int data);
 int stack_pop(Stack *stack);
-void stack_dispose(Stack *stack);
 int stack_empty(Stack *stack);
 void stack_display(Stack *stack);
 
